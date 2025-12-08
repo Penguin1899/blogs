@@ -1,6 +1,6 @@
 ---
 title: "Setting Up a Complete CI/CD Pipeline with GitHub Actions"
-date: 2025-12-06T15:30:00+05:30
+date: 2025-12-08T15:00:00+05:30
 draft: false
 tags: ["tutorial", "github-actions", "ci-cd", "automation"]
 categories: ["tutorials"]

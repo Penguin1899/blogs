@@ -1,6 +1,6 @@
 ---
 title: "Setting Up Kubernetes with Kind - Local Development Guide"
-date: 2025-12-04T14:15:00+05:30
+date: 2025-12-08T14:00:00+05:30
 draft: false
 tags: ["kubernetes", "kind", "local-development", "tutorial"]
 categories: ["tutorial"]
