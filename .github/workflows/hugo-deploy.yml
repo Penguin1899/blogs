@@ -1,0 +1,89 @@
+name: Hugo Blog CI/CD
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+    branches: [main, master]
+  schedule:
+    # Run twice weekly - Tuesday and Friday at 10:00 AM UTC
+    - cron: '0 10 * * 2,5'
+  workflow_dispatch: # Allow manual triggering
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pages: write
+      id-token: write
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+          fetch-depth: 0
+
+      - name: Setup Hugo
+        uses: peaceiris/actions-hugo@v3
+        with:
+          hugo-version: 'latest'
+          extended: true
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+
+      - name: Install Python dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install openai pyyaml requests beautifulsoup4 markdown
+
+      - name: Generate AI content (scheduled runs only)
+        if: github.event_name == 'schedule'
+        run: |
+          echo "🤖 Generating AI-powered blog content..."
+          # TODO: Add AI content generation script here
+          echo "⏭️ AI content generation will be implemented in next phase"
+
+      - name: Build Hugo site
+        run: |
+          echo "🏗️ Building Hugo site..."
+          hugo --minify
+
+      - name: Setup Pages
+        id: pages
+        if: github.event_name == 'push' && (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master')
+        uses: actions/configure-pages@v4
+
+      - name: Upload Pages artifact
+        if: github.event_name == 'push' && (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master')
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./public
+
+      - name: Deploy to GitHub Pages
+        if: github.event_name == 'push' && (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master')
+        id: deployment
+        uses: actions/deploy-pages@v4
+
+      - name: Commit AI generated content (if any)
+        if: github.event_name == 'schedule'
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action AI Bot"
+          
+          if git diff --quiet && git diff --staged --quiet; then
+            echo "No new content generated"
+          else
+            git add content/posts/
+            git commit -m "🤖 Add AI-generated blog post [$(date +'%Y-%m-%d')]" || echo "Nothing to commit"
+            git push || echo "Nothing to push"
+          fi

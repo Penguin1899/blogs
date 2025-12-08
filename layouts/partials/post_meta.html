@@ -1,0 +1,21 @@
+{{- if not .Date.IsZero -}}
+
+<span title="Published date">📅 {{ .Date.Format site.Params.DateFormat }}</span>
+
+{{- if and (.GitInfo) (ne .Date .Lastmod) }}
+&nbsp;•&nbsp;<span title="Last modified">🔄 Updated {{ .Lastmod.Format site.Params.DateFormat }}</span>
+{{- end }}
+
+{{- if (.Param "ShowReadingTime") }}
+&nbsp;•&nbsp;<span title="Reading time">⏱️ {{ .ReadingTime }} min read</span>
+{{- end }}
+
+{{- if (.Param "ShowWordCount") }}
+&nbsp;•&nbsp;<span title="Word count">📄 {{ .WordCount }} words</span>
+{{- end }}
+
+{{- if .Param "ai_generated" }}
+&nbsp;•&nbsp;<span title="AI Generated Content" style="color: #0066cc;">🤖 AI Generated</span>
+{{- end }}
+
+{{- end }}

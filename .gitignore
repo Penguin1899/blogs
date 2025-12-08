@@ -1,0 +1,39 @@
+# Hugo build output
+public/
+resources/_gen/
+
+# Local development
+.hugo_build.lock
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+.env
+.venv
+pip-log.txt
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Dependencies
+node_modules/
+
+# Runtime
+*.pid
+*.seed
+*.pid.lock
