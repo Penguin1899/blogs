@@ -1,6 +1,6 @@
 ---
 title: "Docker Best Practices for DevOps Teams"
-date: 2025-12-05T10:30:00+05:30
+date: 2025-12-08T10:30:00+05:30
 draft: false
 tags: ["docker", "devops", "containers", "best-practices"]
 categories: ["technical"]

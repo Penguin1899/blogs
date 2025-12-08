@@ -1,6 +1,6 @@
 ---
 title: "My DevOps Journey: From Manual Deployments to Full Automation"
-date: 2025-12-07T10:00:00+05:30
+date: 2025-12-08T13:00:00+05:30
 draft: false
 tags: ["career", "devops", "personal-experience"]
 categories: ["personal"]

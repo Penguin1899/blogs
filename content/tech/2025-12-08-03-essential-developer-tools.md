@@ -1,6 +1,6 @@
 ---
 title: "Essential Developer Tools: A Deep Dive"
-date: 2025-12-08T14:42:42+05:30
+date: 2025-12-08T11:00:00+05:30
 draft: false
 tags: ['productivity', 'tools', 'automation', 'development', 'workflow']
 categories: ["tools"]
