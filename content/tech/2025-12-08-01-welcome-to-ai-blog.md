@@ -1,6 +1,6 @@
 ---
 title: "Welcome to AI-Powered Tech Blog 🤖"
-date: 2025-12-08T13:48:45+05:30
+date: 2025-12-08T09:00:00+05:30
 draft: false
 tags: ["AI", "automation", "devops"]
 categories: ["announcements"]

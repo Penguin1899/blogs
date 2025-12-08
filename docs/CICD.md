@@ -51,12 +51,18 @@ hugo --gc --minify --enableGitInfo
 ### Scheduled Workflow (AI Content Generation)
 ```bash
 # What it does:
-# Generates AI content (when implemented)
+# 1. Validates branch (only main/master allowed)
+# 2. Generates AI content (when implemented)  
 git add content/
 git commit -m "🤖 Add AI-generated blog post [timestamp]"
 git push
-# Triggers build-and-deploy automatically
+# 3. Triggers build-and-deploy automatically
 ```
+
+#### Branch Safety for Scheduled Runs
+- ✅ **Conditional execution**: Jobs only run if `github.ref` matches main/master
+- ✅ **Simple and clean**: No extra validation jobs, just smart conditions
+- ✅ **GitHub Actions native**: Uses built-in conditional expressions
 
 ## Environment Variables Needed (Future)
 

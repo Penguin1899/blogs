@@ -1,6 +1,6 @@
 ---
 title: "Lessons Learned from 5 Years in Platform Engineering"
-date: 2025-12-03T16:45:00+05:30
+date: 2025-12-08T12:00:00+05:30
 draft: false
 tags: ["platform-engineering", "career", "lessons-learned", "reflection"]
 categories: ["personal"]

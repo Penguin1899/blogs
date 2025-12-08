@@ -92,7 +92,7 @@ jobs:
 
   # Build job for production deployment
   build:
-    if: github.event_name != 'pull_request'
+    if: github.event_name == 'push' || github.event_name == 'workflow_dispatch' || (github.event_name == 'schedule' && (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master'))
     runs-on: ubuntu-latest
     env:
       HUGO_VERSION: 0.152.2
@@ -189,7 +189,7 @@ jobs:
 
   # Deploy job
   deploy:
-    if: github.event_name == 'push'
+    if: github.event_name == 'push' || github.event_name == 'workflow_dispatch' || (github.event_name == 'schedule' && (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master'))
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
@@ -209,7 +209,7 @@ jobs:
 
   # AI content generation and commit job (for scheduled runs)
   ai-content:
-    if: github.event_name == 'schedule'
+    if: github.event_name == 'schedule' && (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master')
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -234,7 +234,8 @@ jobs:
 
       - name: Generate AI content
         run: |
-          echo "🤖 Generating AI-powered blog content..."
+          echo "🤖 Generating AI-powered blog content on branch: ${GITHUB_REF}"
+          echo "📅 Scheduled run at: $(date)"
           # TODO: Add AI content generation script here
           echo "⏭️ AI content generation will be implemented in next phase"
 
