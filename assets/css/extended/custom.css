@@ -1,0 +1,291 @@
+/* Custom styles for blog sections and post lists */
+
+/* Section page styling */
+.page-header {
+    margin-bottom: 2rem;
+}
+
+.page-header h1 {
+    color: var(--primary);
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.post-description {
+    color: var(--secondary);
+    font-size: 1.1rem;
+    margin-top: 0.5rem;
+}
+
+/* Posts list styling */
+.posts-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.post-entry {
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1.5rem;
+    background: var(--entry);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    position: relative;
+}
+
+.post-entry:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.entry-header h2 {
+    margin: 0 0 0.5rem 0;
+    font-size: 1.4rem;
+    line-height: 1.3;
+}
+
+.entry-header h2 a {
+    color: var(--primary);
+    text-decoration: none;
+}
+
+.entry-header h2 a:hover {
+    color: var(--tertiary);
+}
+
+.entry-content {
+    margin: 1rem 0;
+    color: var(--secondary);
+    line-height: 1.6;
+}
+
+.entry-footer {
+    margin-top: 1rem;
+    font-size: 0.9rem;
+    color: var(--secondary);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    align-items: center;
+    justify-content: center;
+}
+
+.entry-link {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+}
+
+/* Pagination styling */
+.page-footer {
+    margin-top: 3rem;
+}
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    align-items: center;
+}
+
+.pagination a {
+    padding: 0.5rem 1rem;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    text-decoration: none;
+    color: var(--primary);
+    background: var(--entry);
+    transition: all 0.2s ease;
+}
+
+.pagination a:hover {
+    background: var(--tertiary);
+    color: var(--theme);
+}
+
+.pagination .current {
+    background: var(--primary);
+    color: var(--theme);
+    border-color: var(--primary);
+}
+
+/* Section links on home page */
+.page-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: center;
+    margin-top: 2rem;
+}
+
+.section-link {
+    padding: 0.75rem 1.5rem;
+    background: var(--primary);
+    color: var(--theme);
+    text-decoration: none;
+    border-radius: 6px;
+    transition: all 0.2s ease;
+    font-weight: 500;
+}
+
+.section-link:hover {
+    background: var(--tertiary);
+    transform: translateY(-1px);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+/* Home page recent posts */
+.recent-posts-title {
+    text-align: center;
+    margin: 3rem 0 2rem 0;
+    font-size: 2rem;
+    color: var(--primary);
+}
+
+/* No posts message */
+.no-posts {
+    text-align: center;
+    padding: 3rem 0;
+    color: var(--secondary);
+}
+
+.no-posts p {
+    font-size: 1.1rem;
+    margin: 0;
+}
+
+/* Post meta information styling */
+.post-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    font-size: 0.9rem;
+    color: var(--secondary);
+}
+
+.post-meta-item {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+}
+
+.post-meta-item svg {
+    width: 1rem;
+    height: 1rem;
+    opacity: 0.7;
+}
+
+/* Tags in post list */
+.post-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+}
+
+.post-tag {
+    background: var(--code-bg);
+    color: var(--primary);
+    padding: 0.2rem 0.5rem;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    text-decoration: none;
+    border: 1px solid var(--border);
+    transition: all 0.2s ease;
+}
+
+.post-tag:hover {
+    background: var(--primary);
+    color: var(--theme);
+}
+
+/* Social icons styling */
+.social-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    background: var(--theme);
+    border: 2px solid var(--primary);
+    border-radius: 50%;
+    color: var(--primary);
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.social-icon:hover {
+    background: var(--primary);
+    color: var(--theme);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.social-icon svg {
+    width: 20px;
+    height: 20px;
+}
+
+/* Home info section styling */
+.first-entry.home-info {
+    background: var(--entry);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 2rem;
+    margin-bottom: 3rem;
+    text-align: center;
+}
+
+.home-info .entry-header h1 {
+    color: var(--primary);
+    margin-bottom: 1rem;
+    font-size: 2.5rem;
+}
+
+.home-info .entry-content {
+    color: var(--secondary);
+    font-size: 1.1rem;
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .page-header h1 {
+        font-size: 2rem;
+    }
+    
+    .post-entry {
+        padding: 1rem;
+    }
+    
+    .entry-header h2 {
+        font-size: 1.2rem;
+    }
+    
+    .page-links {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .section-link {
+        width: 100%;
+        text-align: center;
+        max-width: 300px;
+    }
+    
+    .home-info .entry-header h1 {
+        font-size: 2rem;
+    }
+    
+    .social-icon {
+        width: 36px;
+        height: 36px;
+    }
+    
+    .social-icon svg {
+        width: 18px;
+        height: 18px;
+    }
+}

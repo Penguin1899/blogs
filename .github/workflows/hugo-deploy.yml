@@ -11,7 +11,55 @@ on:
   workflow_dispatch: # Allow manual triggering
 
 jobs:
+  # Check job for PRs - validates build without deploying
+  check:
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+          fetch-depth: 0
+
+      - name: Setup Hugo
+        uses: peaceiris/actions-hugo@v3
+        with:
+          hugo-version: 'latest'
+          extended: true
+
+      - name: Check Hugo build
+        run: |
+          echo "🔍 Checking Hugo build..."
+          hugo --gc --minify --buildFuture --buildExpired --verbose
+          echo "✅ Hugo build check passed!"
+
+      - name: Validate content
+        run: |
+          echo "📝 Validating content structure..."
+          # Check for required frontmatter in posts
+          find content -name "*.md" -not -name "_index.md" | while read file; do
+            if ! grep -q "^title:" "$file"; then
+              echo "❌ Missing title in $file"
+              exit 1
+            fi
+            if ! grep -q "^date:" "$file"; then
+              echo "❌ Missing date in $file"  
+              exit 1
+            fi
+          done
+          echo "✅ Content validation passed!"
+
+      - name: Check summary
+        run: |
+          echo "## PR Check Results ✅" >> $GITHUB_STEP_SUMMARY
+          echo "- Hugo build: ✅ Passed" >> $GITHUB_STEP_SUMMARY
+          echo "- Content validation: ✅ Passed" >> $GITHUB_STEP_SUMMARY
+          echo "- Ready for merge and deployment" >> $GITHUB_STEP_SUMMARY
+
+  # Build and deploy job for pushes to main/master and scheduled runs
   build-and-deploy:
+    if: github.event_name != 'pull_request'
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -24,6 +72,7 @@ jobs:
         with:
           submodules: recursive
           fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Setup Hugo
         uses: peaceiris/actions-hugo@v3
@@ -44,7 +93,10 @@ jobs:
       - name: Install Python dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install openai pyyaml requests beautifulsoup4 markdown
+          echo "📦 Installing Python packages from requirements.txt..."
+          pip install -r requirements.txt
+          echo "✅ Python dependencies installed:"
+          pip list --format=columns | grep -E "(openai|pyyaml|requests|beautifulsoup4|markdown)"
 
       - name: Generate AI content (scheduled runs only)
         if: github.event_name == 'schedule'
@@ -55,35 +107,50 @@ jobs:
 
       - name: Build Hugo site
         run: |
-          echo "🏗️ Building Hugo site..."
-          hugo --minify
+          echo "🏗️ Building Hugo site for deployment..."
+          hugo --gc --minify --enableGitInfo
 
       - name: Setup Pages
         id: pages
-        if: github.event_name == 'push' && (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master')
+        if: github.event_name == 'push'
         uses: actions/configure-pages@v4
 
       - name: Upload Pages artifact
-        if: github.event_name == 'push' && (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master')
+        if: github.event_name == 'push'
         uses: actions/upload-pages-artifact@v3
         with:
           path: ./public
 
       - name: Deploy to GitHub Pages
-        if: github.event_name == 'push' && (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master')
+        if: github.event_name == 'push'
         id: deployment
         uses: actions/deploy-pages@v4
+
+      - name: Deployment summary
+        if: github.event_name == 'push'
+        run: |
+          echo "## Deployment Results 🚀" >> $GITHUB_STEP_SUMMARY
+          echo "- Site built successfully: ✅" >> $GITHUB_STEP_SUMMARY
+          echo "- Deployed to GitHub Pages: ✅" >> $GITHUB_STEP_SUMMARY
+          echo "- Live at: https://penguin1899.github.io/blogs/" >> $GITHUB_STEP_SUMMARY
 
       - name: Commit AI generated content (if any)
         if: github.event_name == 'schedule'
         run: |
-          git config --local user.email "action@github.com"
-          git config --local user.name "GitHub Action AI Bot"
+          git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
           
+          # Check if there are any changes to commit
           if git diff --quiet && git diff --staged --quiet; then
-            echo "No new content generated"
+            echo "📝 No new AI content generated to commit"
           else
-            git add content/posts/
-            git commit -m "🤖 Add AI-generated blog post [$(date +'%Y-%m-%d')]" || echo "Nothing to commit"
-            git push || echo "Nothing to push"
+            echo "📝 Committing AI-generated content..."
+            git add content/
+            if git commit -m "🤖 Add AI-generated blog post [$(date +'%Y-%m-%d %H:%M:%S UTC')]"; then
+              echo "📤 Pushing changes to repository..."
+              git push
+              echo "✅ Successfully committed and pushed AI-generated content"
+            else
+              echo "ℹ️ Nothing new to commit"
+            fi
           fi

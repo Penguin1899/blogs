@@ -1,6 +1,6 @@
 baseURL: 'https://penguin1899.github.io/blogs'
 languageCode: 'en-us'
-title: 'AI-Powered Tech Blog'
+title: 'AI-Powered Blogs'
 theme: 'PaperMod'
 
 enableRobotsTXT: true
@@ -9,13 +9,16 @@ buildDrafts: false
 buildFuture: false
 buildExpired: false
 
-minify:
-  disableXML: true
-  minifyOutput: true
+# Pagination configuration (Hugo v0.128.0+ format)
+pagination:
+  pagerSize: 10
+  path: "page"
 
+# Define main sections for home page
 params:
+  mainSections: ["tech", "tutorials", "personal"]
   env: production
-  title: "AI-Powered Tech Blog"
+  title: "AI-Powered Blogs,Tutorials, Posts"
   description: "Weekly insights on DevOps, Cloud, AI, and Technology - Powered by AI, Curated by Humans"
   keywords: [Blog, Portfolio, DevOps, Cloud, AI, Technology, Weekly, Automation]
   author: "Rohith Aithal"
@@ -48,7 +51,7 @@ params:
     apple_touch_icon: "/apple-touch-icon.png"
 
   label:
-    text: "AI-Powered Tech Blog 🤖"
+    text: "AI-Powered Blogs, Tutorials, Posts"
     icon: /apple-touch-icon.png
     iconHeight: 35
 
@@ -56,7 +59,7 @@ params:
     enabled: false
 
   homeInfoParams:
-    Title: "Welcome to AI-Powered Tech Blog 🤖"
+    Title: "Welcome to AI-Powered Blogs 🤖"
     Content: "Weekly insights on DevOps, Cloud, AI, and Technology. Content powered by AI, topics curated by humans, published twice weekly through automated workflows."
 
   socialIcons:
@@ -92,18 +95,26 @@ params:
 
 menu:
   main:
-    - identifier: posts
-      name: Posts
-      url: /posts/
+    - identifier: tech
+      name: Tech Blogs
+      url: /tech/
       weight: 10
+    - identifier: tutorials
+      name: Tutorials
+      url: /tutorials/
+      weight: 20
+    - identifier: personal
+      name: Personal
+      url: /personal/
+      weight: 30
     - identifier: tags
       name: Tags
       url: /tags/
-      weight: 20
+      weight: 40
     - identifier: search
       name: Search
       url: /search/
-      weight: 30
+      weight: 50
 
 markup:
   goldmark:
@@ -117,3 +128,8 @@ outputs:
     - HTML
     - RSS
     - JSON
+
+# Taxonomies for post organization
+taxonomies:
+  tag: tags
+  category: categories
