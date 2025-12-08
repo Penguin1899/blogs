@@ -1,0 +1,140 @@
+baseURL: 'https://penguin1899.github.io/blogs'
+languageCode: 'en-us'
+title: 'AI-Powered Blogs'
+theme: 'PaperMod'
+
+enableRobotsTXT: true
+enableGitInfo: true
+buildDrafts: false
+buildFuture: false
+buildExpired: false
+
+# Pagination configuration (Hugo v0.128.0+ format)
+pagination:
+  pagerSize: 10
+  path: "page"
+
+# Define main sections for home page
+params:
+  mainSections: ["tech", "tutorials", "personal"]
+  env: production
+  title: "AI-Powered Blogs,Tutorials, Posts"
+  description: "Weekly insights on DevOps, Cloud, AI, and Technology - Powered by AI, Curated by Humans"
+  keywords: [Blog, Portfolio, DevOps, Cloud, AI, Technology, Weekly, Automation]
+  author: "Rohith Aithal"
+  DateFormat: "January 2, 2006"
+  defaultTheme: auto
+  disableThemeToggle: false
+
+  ShowReadingTime: true
+  ShowShareButtons: true
+  ShowPostNavLinks: true
+  ShowBreadCrumbs: true
+  ShowCodeCopyButtons: true
+  ShowWordCount: true
+  ShowRssButtonInSectionTermList: true
+  UseHugoToc: true
+  disableSpecial1stPost: false
+  disableScrollToTop: false
+  comments: false
+  hidemeta: false
+  hideSummary: false
+  showtoc: false
+  tocopen: false
+
+  assets:
+    disableHLJS: true
+    disableFingerprinting: true
+    favicon: "/favicon.ico"
+    favicon16x16: "/favicon-16x16.png"
+    favicon32x32: "/favicon-32x32.png"
+    apple_touch_icon: "/apple-touch-icon.png"
+
+  label:
+    text: "AI-Powered Blogs, Tutorials, Posts"
+    icon: /apple-touch-icon.png
+    iconHeight: 35
+
+  profileMode:
+    enabled: false
+
+  homeInfoParams:
+    Title: "Welcome to AI-Powered Blogs 🤖"
+    Content: "Weekly insights on DevOps, Cloud, AI, and Technology. Content powered by AI, topics curated by humans, published twice weekly through automated workflows."
+
+  socialIcons:
+    - name: github
+      url: "https://github.com/Penguin1899"
+    - name: linkedin
+      url: "https://linkedin.com/in/your-profile"
+    - name: rss
+      url: "/index.xml"
+
+  analytics:
+    google:
+      SiteVerificationTag: "XYZabc"
+
+  cover:
+    hidden: true
+    hiddenInList: true
+    hiddenInSingle: true
+
+  editPost:
+    URL: "https://github.com/Penguin1899/blogs/tree/main/content"
+    Text: "Suggest Changes"
+    appendFilePath: true
+
+  fuseOpts:
+    isCaseSensitive: false
+    shouldSort: true
+    location: 0
+    distance: 1000
+    threshold: 0.4
+    minMatchCharLength: 0
+    keys: ["title", "permalink", "summary", "content"]
+
+menu:
+  main:
+    - identifier: tech
+      name: Tech Blogs
+      url: /tech/
+      weight: 10
+    - identifier: tutorials
+      name: Tutorials
+      url: /tutorials/
+      weight: 20
+    - identifier: personal
+      name: Personal
+      url: /personal/
+      weight: 30
+    - identifier: tags
+      name: Tags
+      url: /tags/
+      weight: 40
+    - identifier: search
+      name: Search
+      url: /search/
+      weight: 50
+
+markup:
+  goldmark:
+    renderer:
+      unsafe: true
+  highlight:
+    noClasses: false
+
+outputs:
+  home:
+    - HTML
+    - RSS
+    - JSON
+
+# Taxonomies for post organization
+taxonomies:
+  tag: tags
+  category: categories
+
+# Cache configuration for better performance
+caches:
+  images:
+    dir: :cacheDir/images
