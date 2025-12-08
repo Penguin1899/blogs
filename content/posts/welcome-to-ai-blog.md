@@ -64,3 +64,7 @@ While powered by AI, this blog is designed to serve the tech community. Expect c
 **Stay tuned for our first AI-generated post coming soon! 🎊**
 
 *This blog is an ongoing experiment in automated content creation. Your feedback and suggestions are always welcome.*
+
+---
+
+**Update**: Git info tracking is now enabled to show creation and modification dates for all posts!
