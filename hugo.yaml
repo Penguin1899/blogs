@@ -133,3 +133,8 @@ outputs:
 taxonomies:
   tag: tags
   category: categories
+
+# Cache configuration for better performance
+caches:
+  images:
+    dir: :cacheDir/images
