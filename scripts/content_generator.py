@@ -11,8 +11,13 @@ from pathlib import Path
 from typing import Dict
 
 class ContentGenerator:
-    def __init__(self, base_dir: str = "content"):
-        self.base_dir = Path(base_dir)
+    def __init__(self, base_dir: str = None):
+        if base_dir is None:
+            # Get the parent directory of scripts folder (project root) and then content folder
+            project_root = Path(__file__).parent.parent
+            self.base_dir = project_root / "content"
+        else:
+            self.base_dir = Path(base_dir)
         
     def create_system_prompt(self) -> str:
         """Create system prompt for AI"""
