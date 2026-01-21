@@ -267,11 +267,7 @@ jobs:
             # Generate summary of changes for commit message
             NEW_POSTS=$(git diff --cached --name-only | grep -c "\.md$" || echo "0")
             
-            COMMIT_MSG="🤖 AI Content Generation - $(date +'%Y-%m-%d %H:%M UTC')
-
-📝 Generated $NEW_POSTS new blog post(s) using llama3.2:latest
-🎯 Simple, focused content generation
-🚀 Random topic selection with quality content"
+            COMMIT_MSG="🤖 AI Content Generation - $(date +'%Y-%m-%d %H:%M UTC')"
             
             git commit -m "$COMMIT_MSG" || echo "Nothing to commit"
             
